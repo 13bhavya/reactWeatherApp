@@ -1,0 +1,89 @@
+/* basic style */
+
+.skeleton {
+    background-color: rgb(190, 190, 190);
+    margin: 10px 25px;
+    border-radius: 4px;
+}
+
+.skeleton.title {
+    width: 30%;
+    height: 30px;
+}
+
+.skeleton.text {
+    width: 50%;
+    height: 12px;
+}
+
+.skeleton.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+
+/* Skeleton Large */
+
+.skeleton.largetitle {
+    width: 70%;
+    height: 30px;
+}
+
+.skeleton.largetext {
+    width: 50%;
+    height: 15px;
+}
+
+.skeleton.largeavatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+
+/* Skeleton themes */
+
+.skeleton-wrapper {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.skeleton-wrapper.light {
+    background: rgb(224, 224, 224);
+}
+
+.skeleton-wrapper.dark {
+    background: #777;
+}
+
+
+/* Skeleton Shimmer */
+
+.skeleton-shimmer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    animation: 2s loading infinite;
+}
+
+.shimmer {
+    width: 50%;
+    height: 100%;
+    background: rgba(224, 224, 224, 0.445);
+    transform: skewX(-20deg);
+}
+
+@keyframes loading {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(160%);
+    }
+}
