@@ -16,7 +16,7 @@ const Infocard = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [weatherData, setWeatherData] = useState([]);
     const [city, setCity] = useState('Unknown Location');
-    const [coordinates, setCoordinates] = useState({});
+    const [coordinates, setCoordinates] = useState({ lat: '5', lng: '55' });
     const [bounds, setBounds] = useState(null);
     const [weatherIcon, setWeatherIcon] = useState(`${process.env.REACT_APP_ICON_URL}10n@2x.png`)
 
@@ -72,22 +72,22 @@ const Infocard = () => {
     }
 
     return (
-        <div className="bg-gray-800 flex items-center justify-center w-screen h-screen py-10">
-            <div className="flex w-3/4 min-h-full rounded-3xl shadow-lg m-auto bg-gray-100">
+        <div className="bg-gray-800 flex items-center justify-center w-screen h-screen m-auto p-10 max-w-screen-xl">
+            <div className=" w-3/4 m-auto min-h-max rounded-3xl shadow-lg body-cover lg:w-full lg:flex bg-gray-100 lg:bg-gray-100">
 
-                < div className="form-container" >
+                < div className="form-container m-auto w-auto h-full lg:m-0 lg:w-1/2">
                     <div className="flex items-center justify-center">
-                        <h3 className="my-auto mr-auto text-xl text-pink-800 font-bold shadow-md py-1 px-3 
-                                rounded-md bg-white bg-opacity-30">forecast</h3>
+                        <h3 className="my-auto mr-auto text-pink-800 font-bold shadow-md py-1 px-3 
+                                rounded-md bg-white bg-opacity-30 text-sm lg:text-xl">forecast</h3>
                         <div className="flex p-2 text-gray-100 bg-gray-600 bg-opacity-30 rounded-lg">
                             <i className="fa fa-map my-auto" aria-hidden="true"></i>
                             <div className="text-right">
-                                <p className="font-semibold text-sm ml-2">{city}</p>
+                                <p className="font-semibold text-sm lg:text-xl ml-2">{city}</p>
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-col items-center justify-center h-full">
-                        <h1 className="text-white text-2xl">The Only Weather Forecast You Need</h1>
+                    <div className="dispheigh">
+                        <h1 className="text-white text-xl lg:text-2xl">The Only Weather Forecast You Need</h1>
                         <hr className="h-1 bg-white w-1/4 rounded-full my-5" />
                         <form noValidate onSubmit={handleSubmit} className="flex justify-center w-full">
                             <input type="text"
@@ -108,43 +108,40 @@ const Infocard = () => {
                     </div>
                 </div >
                 {/* Right section   */}
-                <div className="w-2/4 p-5">
-                    <Header onactive={active} setactive={setActive} />
+                <div className=" lg:w-1/2 p-5">
+                    <Header setactive={setActive} />
+                    {active === "Weather" &&
+                        <div className="cov-map flex flex-col my-10">
+                            {weatherData.length === 0 ?
+                                <div>
+                                    <SkeletonLarge shades="light" />
+                                    <ul className="grid grid-cols-2 gap-2 lg:mt-20 mt-10">
+                                        {[1, 2, 3, 4].map((n) => <SkeletonCard shades="light" key={n} />)}
+                                    </ul>
+                                </div> :
+                                <div>
+                                    <h1 className="text-5xl text-gray-800 mt-auto mb-4">Today</h1>
+                                    <DetailCards weather_icon={weatherIcon} data={weatherData} />
+                                    <h1 className="text-3xl text-gray-600 mb-4 mt-10">More On {city}</h1>
+                                    <ul className="grid grid-cols-2  gap-2">
 
-
-                    <div className="flex flex-col my-10">
-
-                        {active === "Weather" &&
-                            <div>
-                                {weatherData.length === 0 ?
-                                    <>
-                                        {active}
-                                        <SkeletonLarge shades="light" />
-                                        <ul className="grid grid-cols-2 gap-2 mt-20">
-                                            {[1, 2, 3, 4].map((n) => <SkeletonCard shades="light" key={n} />)}
-                                        </ul>
-                                    </> :
-                                    <>
-                                        <h1 className="text-5xl text-gray-800 mt-auto mb-4">Today</h1>
-                                        <DetailCards weather_icon={weatherIcon} data={weatherData} />
-                                        <h1 className="text-3xl text-gray-600 mb-4 mt-10">More On {city}</h1>
-                                        <ul className="grid grid-cols-2  gap-2">
-
-                                            {weatherData.list.map((days, index) => {
-                                                if (index > 0) {
-                                                    return (
-                                                        <SummaryCard key={index} day={days} />
-                                                    )
-                                                }
-                                            })}
-                                        </ul>
-                                    </>}
-                            </div>
-                        }
-                        {
-                            active === "Map" && <Maps setBounds={setBounds} coordinates={coordinates} setCoordinates={setCoordinates} />
-                        }
-                    </div>
+                                        {weatherData.list.map((days, index) => {
+                                            if (index > 0) {
+                                                return (
+                                                    <SummaryCard key={index} day={days} />
+                                                )
+                                            }
+                                        })}
+                                    </ul>
+                                </div>}
+                        </div>
+                    }
+                    {
+                        active === "Map" && <Maps setBounds={setBounds} city={city} coordinates={coordinates} setCoordinates={setCoordinates} />
+                    }
+                    {
+                        active === "Alerts" && <p className='text-xl font-bold'>Soon to be uploaded</p>
+                    }
                 </div>
             </div>
         </div >

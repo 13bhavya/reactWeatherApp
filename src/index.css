@@ -5,17 +5,38 @@
 body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
-    background-color: rgb(196, 124, 124);
+    background-color: rgb(31 41 55);
 }
 
 h1 {
     font-weight: bold;
 }
 
-.form-container {
-    background: url('https://airwallpaper.com/wp-content/uploads/wall004/Lake-Backgrounds-620x349.jpg') no-repeat 50% 40% / cover;
-    height: auto;
-    @apply w-2/4 p-5 rounded-3xl
+@media (min-width: 640px) {
+    .form-container {
+        background: url('https://airwallpaper.com/wp-content/uploads/wall004/Lake-Backgrounds-620x349.jpg') no-repeat 50% / cover;
+        height: 30vh;
+        width: 100%;
+    }
+    .cover-map {
+        height: 25rem;
+        width: 100%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .form-container {
+        background: url('https://airwallpaper.com/wp-content/uploads/wall004/Lake-Backgrounds-620x349.jpg') no-repeat 50% / fit-content;
+        height: auto;
+        width: 50%;
+    }
+    .cover-map {
+        height: 75vh;
+        width: 100%;
+    }
+    .body-cover {
+        height: 85vh;
+    }
 }
 
 .alert-notice::after {
@@ -27,6 +48,14 @@ h1 {
     margin-left: 2px;
     margin-top: -3px;
     @apply animate-ping bg-pink-800
+}
+
+.dispheigh {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .cards-fade {

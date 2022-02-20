@@ -3,7 +3,7 @@ import SkeletonElement from './SkeletonElement';
 
 const SkeletonLarge = ({ shades }) => {
 
-    const shade = `grid grid-rows-2 mt-20 skeleton-wrapper ${shades}`
+    const shade = `grid grid-rows-2 lg:mt-20 mt-15 skeleton-wrapper ${shades}`
     return (
         <div className={shade}>
             <div className='grid grid-cols-2 mt-5'>
@@ -24,7 +24,7 @@ const SkeletonLarge = ({ shades }) => {
                     <SkeletonElement type="largetitle" />
                 </div>
             </div>
-            <Shimmer/>
+            <Shimmer />
         </div>
 
     );
